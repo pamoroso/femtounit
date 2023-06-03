@@ -1,0 +1,59 @@
+(DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
+
+(FILECREATED " 3-Jun-2023 02:39:28" {DSK}<home>medley>il>FEMTOUNIT.;7 2311   
+
+      :EDIT-BY "PA"
+
+      :CHANGES-TO (FNS REPORT.RESULT)
+
+      :PREVIOUS-DATE " 2-Jun-2023 11:33:06" {DSK}<home>medley>il>FEMTOUNIT.;6)
+
+
+(PRETTYCOMPRINT FEMTOUNITCOMS)
+
+(RPAQQ FEMTOUNITCOMS ((VARS (FTU.TEST.NAME NIL))
+                      (FNS REPORT.RESULT)
+                      (FUNCTIONS CHECK.EXPECT COMBINE.RESULTS DEFTEST)))
+
+(RPAQQ FTU.TEST.NAME NIL)
+(DEFINEQ
+
+(REPORT.RESULT
+  [LAMBDA (RESULT FORM)                                      (* ; "Edited  3-Jun-2023 02:38 by PA")
+                                                             (* ; "Edited 31-May-2023 10:27 by PA")
+
+         (* Report the results RESULT of the single test case FORM and return RESULT.
+         Called by CHECK.EXPECT.)
+
+    (if RESULT
+        then (PRIN1 ".")
+      else (FRESHLINE)
+           (PRINTOUT NIL "FAIL" %, FTU.TEST.NAME ":" %, FORM T))
+    RESULT])
+)
+
+(DEFMACRO CHECK.EXPECT (&BODY FORMS)                         (* ; "Edited 31-May-2023 11:29 by PA")
+                                                             (* ; 
+                                       "Run each expression in the sequence of FORMS as a test case.")
+   `[COMBINE.RESULTS ,@(FOR F IN FORMS COLLECT `(REPORT.RESULT ,F ',F])
+
+(DEFMACRO COMBINE.RESULTS (&BODY FORMS &AUX (RESULT (GENSYM)))
+                                                             (* ; "Edited 31-May-2023 10:22 by PA")
+
+   (* ;; "Combine the results as booleans of evaluating the sequence of FORMS in order.  Similar to AND but all the forms are evaluated.")
+
+   `(LET ((,RESULT T))
+         ,@[FOR F IN FORMS COLLECT `(IF (NOT ,F)
+                                        THEN (SETQ ,RESULT NIL]
+         ,RESULT))
+
+(DEFMACRO DEFTEST (NAME PARAMETERS &BODY BODY)
+
+   (* ;; "Edited  1-Jun-2023 10:07 by PA: RAMETERS and a sequence of forms as the BODY.  The test function has a syntax similar to DEFUN in Common Lisp.")
+
+   `(DEFINEQ (,NAME ,PARAMETERS (LET [(FTU.TEST.NAME (APPEND FTU.TEST.NAME (LIST ',NAME]
+                                     ,@BODY))))
+(DECLARE%: DONTCOPY
+  (FILEMAP (NIL (530 1059 (REPORT.RESULT 540 . 1057)) (1061 1442 (CHECK.EXPECT 1061 . 1442)) (1444 1938 
+(COMBINE.RESULTS 1444 . 1938)) (1940 2288 (DEFTEST 1940 . 2288)))))
+STOP

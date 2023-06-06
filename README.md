@@ -77,6 +77,7 @@ See the [list of releases](https://github.com/pamoroso/femtounit/releases) for n
 
 ## Learn more
 
+- [Femtounit project updates](https://journal.paoloamoroso.com/tag:femtounit)
 - [Medley Interlisp](https://interlisp.org)
 
 

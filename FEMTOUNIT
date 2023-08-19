@@ -1,19 +1,22 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED " 3-Jun-2023 02:39:28" {DSK}<home>medley>il>FEMTOUNIT.;7 2311   
+(FILECREATED "19-Aug-2023 04:27:10" {DSK}<home>medley>il>FEMTOUNIT.;9 2645   
 
       :EDIT-BY "PA"
 
-      :CHANGES-TO (FNS REPORT.RESULT)
+      :CHANGES-TO (FUNCTIONS DEFTEST)
+                  (VARS FEMTOUNITCOMS)
+                  (DEFINE-TYPES TESTS)
 
-      :PREVIOUS-DATE " 2-Jun-2023 11:33:06" {DSK}<home>medley>il>FEMTOUNIT.;6)
+      :PREVIOUS-DATE " 3-Jun-2023 02:39:28" {DSK}<home>medley>il>FEMTOUNIT.;7)
 
 
 (PRETTYCOMPRINT FEMTOUNITCOMS)
 
 (RPAQQ FEMTOUNITCOMS ((VARS (FTU.TEST.NAME NIL))
                       (FNS REPORT.RESULT)
-                      (FUNCTIONS CHECK.EXPECT COMBINE.RESULTS DEFTEST)))
+                      (FUNCTIONS CHECK.EXPECT COMBINE.RESULTS DEFTEST)
+                      (DEFINE-TYPES TESTS)))
 
 (RPAQQ FTU.TEST.NAME NIL)
 (DEFINEQ
@@ -47,13 +50,16 @@
                                         THEN (SETQ ,RESULT NIL]
          ,RESULT))
 
-(DEFMACRO DEFTEST (NAME PARAMETERS &BODY BODY)
-
-   (* ;; "Edited  1-Jun-2023 10:07 by PA: RAMETERS and a sequence of forms as the BODY.  The test function has a syntax similar to DEFUN in Common Lisp.")
-
+(DEFDEFINER (DEFTEST [:PROTOTYPE (LAMBDA (NAME)
+                                   (AND (LITATOM NAME)
+                                        `(DEFTEST ,NAME ("Arg List")
+                                            "Body")]) TESTS (NAME PARAMETERS &BODY BODY)
+                                                             (* ; "Edited 19-Aug-2023 04:25 by PA")
    `(DEFINEQ (,NAME ,PARAMETERS (LET [(FTU.TEST.NAME (APPEND FTU.TEST.NAME (LIST ',NAME]
                                      ,@BODY))))
+
+(DEF-DEFINE-TYPE TESTS "Femtounit unit tests")
 (DECLARE%: DONTCOPY
-  (FILEMAP (NIL (530 1059 (REPORT.RESULT 540 . 1057)) (1061 1442 (CHECK.EXPECT 1061 . 1442)) (1444 1938 
-(COMBINE.RESULTS 1444 . 1938)) (1940 2288 (DEFTEST 1940 . 2288)))))
+  (FILEMAP (NIL (651 1180 (REPORT.RESULT 661 . 1178)) (1182 1563 (CHECK.EXPECT 1182 . 1563)) (1565 2059 
+(COMBINE.RESULTS 1565 . 2059)))))
 STOP

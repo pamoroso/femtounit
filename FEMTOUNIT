@@ -1,12 +1,12 @@
 (DEFINE-FILE-INFO PACKAGE "INTERLISP" READTABLE "INTERLISP" BASE 10)
 
-(FILECREATED "19-Aug-2023 09:00:44" {DSK}<home>medley>il>FEMTOUNIT.;10 2682   
+(FILECREATED " 6-Sep-2023 10:00:11" {DSK}<home>medley>il>FEMTOUNIT.;12 2829   
 
       :EDIT-BY "PA"
 
-      :CHANGES-TO (VARS FEMTOUNITCOMS)
+      :CHANGES-TO (FUNCTIONS DEFTEST)
 
-      :PREVIOUS-DATE "19-Aug-2023 04:27:10" {DSK}<home>medley>il>FEMTOUNIT.;9)
+      :PREVIOUS-DATE " 6-Sep-2023 09:55:39" {DSK}<home>medley>il>FEMTOUNIT.;11)
 
 
 (PRETTYCOMPRINT FEMTOUNITCOMS)
@@ -53,9 +53,11 @@
                                    (AND (LITATOM NAME)
                                         `(DEFTEST ,NAME ("Arg List")
                                             "Body")]) TESTS (NAME PARAMETERS &BODY BODY)
+                                                             (* ; "Edited  6-Sep-2023 10:00 by PA")
                                                              (* ; "Edited 19-Aug-2023 04:25 by PA")
-   `(DEFINEQ (,NAME ,PARAMETERS (LET [(FTU.TEST.NAME (APPEND FTU.TEST.NAME (LIST ',NAME]
-                                     ,@BODY))))
+   `[PUTD ',NAME (FUNCTION (LAMBDA ,PARAMETERS
+                             (LET [(FTU.TEST.NAME (APPEND FTU.TEST.NAME (LIST ',NAME]
+                                  ,@BODY])
 
 (DEF-DEFINE-TYPE TESTS "Femtounit unit tests")
 
